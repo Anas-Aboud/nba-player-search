@@ -4,6 +4,8 @@ A browser-based course project that searches for NBA players by first or last na
 
 ![NBA Player Search results](docs/screenshots/search-results.png)
 
+<img src="docs/screenshots/mobile.png" alt="NBA Player Search mobile layout" width="320">
+
 ## Why this project is in my portfolio
 
 This is my strongest completed coding project from the reviewed course files. It demonstrates HTML, responsive CSS, JavaScript, DOM manipulation, asynchronous API requests, and user-facing error handling.
@@ -12,11 +14,14 @@ This is my strongest completed coding project from the reviewed course files. It
 
 This was a three-person academic team project. I completed the frontend implementation: the HTML structure, CSS presentation, JavaScript behavior, REST API request, results table, validation, reset behavior, and error states.
 
+The public portfolio revision keeps the original API workflow while introducing a new responsive visual system, player cards, and quick-search controls.
+
 ## Features
 
 - Search by a player's first or last name.
 - Fetch player information with `fetch` and `async/await`.
-- Display name, team, conference, position, jersey number, and college.
+- Display name, team, conference, position, jersey number, and college in responsive player cards.
+- Start common searches with quick-search controls.
 - Handle missing configuration, no results, and API failures.
 - Clear the current query and results.
 - Support smaller screens with a responsive layout and horizontally scrollable results.
@@ -48,7 +53,7 @@ This was a three-person academic team project. I completed the frontend implemen
 
 ## Usage
 
-Enter a player's first or last name, select **Search**, and review the returned table. Select **Clear** to reset the page.
+Enter a player's first or last name, select **Search**, and review the returned player cards. Select **Clear** to reset the page.
 
 ## Tests
 
@@ -60,11 +65,12 @@ npx playwright install chromium
 npm test
 ```
 
-The prepared version was verified on September 8, 2026 with mocked API responses for:
+The prepared version was verified on September 8, 2026 with mocked API responses and desktop/mobile browser checks for:
 
-- Successful search and table rendering.
+- Successful search and player-card rendering.
 - Empty results.
 - API failure handling.
+- Responsive layout and quick-search controls.
 
 ## Security note
 

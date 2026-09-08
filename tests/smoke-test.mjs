@@ -73,8 +73,8 @@ try {
 
   await page.getByLabel("Player name").fill("LeBron");
   await page.getByRole("button", { name: "Search" }).click();
-  await page.getByRole("cell", { name: "LeBron James" }).waitFor();
-  assert.equal(await page.locator("tbody tr").count(), 1);
+  await page.getByRole("heading", { name: "LeBron James" }).waitFor();
+  assert.equal(await page.locator(".player-card").count(), 1);
   assert.match(await page.locator("#status-message").textContent(), /1 player found/);
   await page.screenshot({ path: join(screenshotDirectory, "search-results.png"), fullPage: true });
   console.log("PASS successful search renders player data");
@@ -83,7 +83,7 @@ try {
   await page.getByLabel("Player name").fill("Unknown Player");
   await page.getByRole("button", { name: "Search" }).click();
   await page.getByText("No players found.").waitFor();
-  assert.equal(await page.locator("tbody tr").count(), 0);
+  assert.equal(await page.locator(".player-card").count(), 0);
   console.log("PASS empty API response shows a clear message");
 
   responseMode = "failure";

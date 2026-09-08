@@ -7,6 +7,7 @@ const resultsElement = document.getElementById("results");
 const errorElement = document.getElementById("error-message");
 const statusElement = document.getElementById("status-message");
 const clearButton = document.getElementById("clear-btn");
+const quickPlayerButtons = document.querySelectorAll(".quick-player");
 
 nbaForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -55,42 +56,67 @@ nbaForm.addEventListener("submit", async (event) => {
 clearButton.addEventListener("click", () => {
   nameInput.value = "";
   clearFeedback();
+  statusElement.textContent = "Enter a name above to begin.";
   nameInput.focus();
 });
 
+quickPlayerButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    nameInput.value = button.dataset.player;
+    nbaForm.requestSubmit();
+  });
+});
+
 function renderPlayers(players) {
-  const table = document.createElement("table");
-  const headerRow = table.createTHead().insertRow();
-
-  ["Name", "Team", "Conference", "Position", "Jersey", "College"].forEach((title) => {
-    const header = document.createElement("th");
-    header.scope = "col";
-    header.textContent = title;
-    headerRow.appendChild(header);
-  });
-
-  const body = table.createTBody();
   players.forEach((player) => {
-    const row = body.insertRow();
     const team = player.team || {};
-    const values = [
-      `${player.first_name || ""} ${player.last_name || ""}`.trim() || "Not available",
-      team.full_name
-        ? `${team.full_name}${team.abbreviation ? ` (${team.abbreviation})` : ""}`
-        : "Not available",
-      team.conference || "Not available",
-      player.position || "Not available",
-      player.jersey_number ? `#${player.jersey_number}` : "Not available",
-      player.college || "Not available",
-    ];
+    const fullName = `${player.first_name || ""} ${player.last_name || ""}`.trim() || "Not available";
+    const initials = `${player.first_name?.[0] || ""}${player.last_name?.[0] || ""}` || "NBA";
+    const card = document.createElement("article");
+    card.className = "player-card";
 
-    values.forEach((value) => {
-      const cell = row.insertCell();
-      cell.textContent = value;
+    const monogram = document.createElement("div");
+    monogram.className = "player-monogram";
+    monogram.setAttribute("aria-hidden", "true");
+    monogram.textContent = initials;
+
+    const content = document.createElement("div");
+    const header = document.createElement("div");
+    header.className = "player-header";
+    const name = document.createElement("h3");
+    name.className = "player-name";
+    name.textContent = fullName;
+    const teamCode = document.createElement("span");
+    teamCode.className = "team-code";
+    teamCode.textContent = team.abbreviation || "NBA";
+    header.append(name, teamCode);
+
+    const teamName = document.createElement("p");
+    teamName.className = "team-name";
+    teamName.textContent = team.full_name || "Team not available";
+
+    const metadata = document.createElement("dl");
+    metadata.className = "player-meta";
+    [
+      ["Position", player.position || "—"],
+      ["Jersey", player.jersey_number ? `#${player.jersey_number}` : "—"],
+      ["Conference", team.conference || "—"],
+      ["College", player.college || "Not available"],
+    ].forEach(([label, value]) => {
+      const wrapper = document.createElement("div");
+      const term = document.createElement("dt");
+      const description = document.createElement("dd");
+      term.textContent = label;
+      description.textContent = value;
+      description.title = value;
+      wrapper.append(term, description);
+      metadata.appendChild(wrapper);
     });
-  });
 
-  resultsElement.appendChild(table);
+    content.append(header, teamName, metadata);
+    card.append(monogram, content);
+    resultsElement.appendChild(card);
+  });
 }
 
 function showError(message) {

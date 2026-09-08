@@ -3,45 +3,89 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Search for NBA players and view team and player information."
-    >
-    <title>NBA Player Search</title>
+    <meta name="description" content="Search NBA players and view player and team information.">
+    <title>Courtside — NBA Player Search</title>
     <link rel="stylesheet" href="styles.css">
     <script>window.APP_CONFIG = window.APP_CONFIG || {};</script>
     <script src="config.js"></script>
     <script src="script.js" defer></script>
   </head>
   <body>
-    <main class="container">
-      <header>
-        <p class="eyebrow">Web Development Course Project</p>
-        <h1>NBA Player Search</h1>
-        <p class="intro">Search by a player's first or last name.</p>
-      </header>
+    <div class="page-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Courtside home">
+          <span class="brand-ball" aria-hidden="true"></span>
+          <span>COURTSIDE</span>
+        </a>
+        <span class="demo-label">Course project · API demo</span>
+      </nav>
 
-      <form id="nba-form">
-        <label for="player-name">Player name</label>
-        <input
-          type="search"
-          id="player-name"
-          name="player-name"
-          placeholder="For example, LeBron"
-          autocomplete="off"
-          required
-        >
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">PLAYER DATABASE</p>
+            <h1>Find the player.<br><span>Know the game.</span></h1>
+            <p class="intro">
+              Search current and historical NBA players and see their team,
+              conference, position, jersey number, and college.
+            </p>
+          </div>
 
-        <div class="buttons">
-          <button type="submit">Search</button>
-          <button type="button" id="clear-btn" class="secondary">Clear</button>
-        </div>
-      </form>
+          <div class="search-card">
+            <div class="search-card-heading">
+              <div>
+                <p class="section-kicker">QUICK SEARCH</p>
+                <h2>Player lookup</h2>
+              </div>
+              <span class="live-dot"><span aria-hidden="true"></span> API powered</span>
+            </div>
 
-      <p id="status-message" class="status" aria-live="polite"></p>
-      <section id="results" aria-label="Player search results" aria-live="polite"></section>
-      <p id="error-message" class="error" role="alert"></p>
-    </main>
+            <form id="nba-form">
+              <label for="player-name">Player name</label>
+              <div class="search-control">
+                <span class="search-icon" aria-hidden="true"></span>
+                <input
+                  type="search"
+                  id="player-name"
+                  name="player-name"
+                  placeholder="Try LeBron, Curry, or Durant"
+                  autocomplete="off"
+                  required
+                >
+                <button type="submit">Search</button>
+              </div>
+            </form>
+
+            <div class="quick-searches" aria-label="Example searches">
+              <span>Popular:</span>
+              <button type="button" class="quick-player" data-player="LeBron">LeBron</button>
+              <button type="button" class="quick-player" data-player="Curry">Curry</button>
+              <button type="button" class="quick-player" data-player="Durant">Durant</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="results-panel" aria-labelledby="results-heading">
+          <div class="results-heading-row">
+            <div>
+              <p class="section-kicker">SEARCH RESULTS</p>
+              <h2 id="results-heading">Player cards</h2>
+            </div>
+            <button type="button" id="clear-btn" class="clear-button">Clear results</button>
+          </div>
+
+          <p id="status-message" class="status" aria-live="polite">
+            Enter a name above to begin.
+          </p>
+          <section id="results" class="player-grid" aria-label="Player search results" aria-live="polite"></section>
+          <p id="error-message" class="error" role="alert"></p>
+        </section>
+      </main>
+
+      <footer>
+        <span>Built with HTML, CSS, JavaScript, and the balldontlie API.</span>
+        <span>Portfolio revision</span>
+      </footer>
+    </div>
   </body>
 </html>
-
