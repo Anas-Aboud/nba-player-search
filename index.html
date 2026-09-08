@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Search for NBA players and view team and player information."
+    >
+    <title>NBA Player Search</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>window.APP_CONFIG = window.APP_CONFIG || {};</script>
+    <script src="config.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <p class="eyebrow">Web Development Course Project</p>
+        <h1>NBA Player Search</h1>
+        <p class="intro">Search by a player's first or last name.</p>
+      </header>
+
+      <form id="nba-form">
+        <label for="player-name">Player name</label>
+        <input
+          type="search"
+          id="player-name"
+          name="player-name"
+          placeholder="For example, LeBron"
+          autocomplete="off"
+          required
+        >
+
+        <div class="buttons">
+          <button type="submit">Search</button>
+          <button type="button" id="clear-btn" class="secondary">Clear</button>
+        </div>
+      </form>
+
+      <p id="status-message" class="status" aria-live="polite"></p>
+      <section id="results" aria-label="Player search results" aria-live="polite"></section>
+      <p id="error-message" class="error" role="alert"></p>
+    </main>
+  </body>
+</html>
+

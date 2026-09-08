@@ -1,0 +1,13 @@
+{
+  "name": "nba-player-search",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend course project for searching NBA player data.",
+  "scripts": {
+    "test": "node tests/smoke-test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
+

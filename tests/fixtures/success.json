@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "first_name": "LeBron",
+      "last_name": "James",
+      "position": "F",
+      "jersey_number": "23",
+      "college": "St. Vincent-St. Mary HS",
+      "team": {
+        "full_name": "Los Angeles Lakers",
+        "abbreviation": "LAL",
+        "conference": "West"
+      }
+    }
+  ]
+}
